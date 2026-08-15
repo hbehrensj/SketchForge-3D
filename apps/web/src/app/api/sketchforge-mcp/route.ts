@@ -34,7 +34,10 @@ function isLocalRequest(request: Request) {
   return !fetchSite || fetchSite === "same-origin" || fetchSite === "none";
 }
 
+const MCP_ENABLED = process.env.SKETCHFORGE_ENABLE_MCP === "true";
+
 function localOnly(request: Request) {
+  if (MCP_ENABLED) return null; // self-hosted LAN opt-in
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "SketchForge MCP is only available in local development." }, { status: 404 });
   }
