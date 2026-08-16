@@ -6,7 +6,6 @@ WORKDIR /app
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SKETCHFORGE_DOCKER_BUILD=true
-ENV NEXT_PUBLIC_SKETCHFORGE_ENABLE_MCP=true
 
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -23,7 +22,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 ENV SKETCHFORGE_SHARED_PROJECTS_DIR=/data/projects
-ENV SKETCHFORGE_ENABLE_MCP=true
 
 RUN apk add --no-cache libcap \
   && setcap cap_net_bind_service=+ep /usr/local/bin/node \

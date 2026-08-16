@@ -8100,11 +8100,11 @@ export function SketchForgeEditor({
   }, [executeMcpCommand]);
 
   useEffect(() => {
-    const mcpEnabled = process.env.NEXT_PUBLIC_SKETCHFORGE_ENABLE_MCP === "true";
-    if (typeof window === "undefined") return;
-    if (!mcpEnabled) {
-      if (process.env.NODE_ENV === "production") return;
-      if (!["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)) return;
+    if (process.env.NODE_ENV === "production" || typeof window === "undefined") {
+      return;
+    }
+    if (!["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)) {
+      return;
     }
 
     const identity = readMcpEditorIdentity();
